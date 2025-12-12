@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --fundo: #F5F5F5;
+    --cards: #FFFFFF;
+    --texto: #333333;
+    --botão-principal: #4A90E2;
+    --botão-completar: #2ECC71;
+    --botão-excluir: #E74C3C;
+}
+
+body {
+    font-family: "Inter", sans serif;
+    background-color: var(--fundo);
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+    color: var(--texto);
+}
