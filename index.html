@@ -9,6 +9,34 @@
 </head>
 <body>
     <h1>Lista de Tarefas</h1>
+    <header>
+       <input type="text" name="task" id="task" placeholder="Digite Sua Tarefa">
+       <button class="add">Adicionar</button>
+        <main id="task-list">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-regular fa-circle"></i>
+                </div>
+                <div class="card-name">
+                    teste de Tarefa
+                </div>
+                <div class="card-button">
+                    <button class="delete"><i class="fa-solid fa-trash-can"></i> Deletar</button>
+                </div>
+            </div>
+            <div class="card checked">
+                <div class="card-icon">
+                    <i id="check" class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="card-name">
+                    teste de Tarefa
+                </div>
+                <div class="card-button">
+                    <button class="delete"><i class="fa-solid fa-trash-can"></i> Deletar</button>
+                </div>
+            </div>
+        </main>
+    </header>
     <script src="js/script.js"></script>
 </body>
 </html>

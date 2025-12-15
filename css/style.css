@@ -23,7 +23,98 @@ body {
 }
 
 h1 {
+    padding: 20px;
     text-align: center;
-    font-size: 3em;
+    font-size: 3rem;
     color: var(--texto);
+}
+
+header {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    width: 90%;
+    /*border: 1px solid red;*/
+    margin: auto;
+}
+
+input {
+    height: 120px;
+    font-size: 2rem;
+    width: 80%;
+    padding-left: 10%;
+}
+
+button.add {
+    width: 20%;
+    cursor: pointer;
+    background-color: var(--botão-principal);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 120px;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    margin: auto;
+    /*border: 1px solid blue; */
+    padding-top: 40px;
+}
+
+.card {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cards);
+    height: 80px;
+    width: 100%;
+    box-shadow: 0 0 20px #ccc;
+    margin-bottom: 2%;
+}
+
+
+.card.checked {
+    background-color: #d0fde3;
+}
+
+.card-icon {
+    flex: 20%;
+    /*border: 1px solid orangered;*/
+    text-align: center;
+    font-size: 2rem;
+}
+
+.card-name {
+    flex: 55%;
+    /*border: 1px solid deeppink;*/
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.card-button {
+    flex: 25%;
+    /*border: 1px solid green; */
+}
+
+.delete {
+    background-color: var(--botão-excluir);
+    color: white;
+    border: none;
+    padding: 10px;
+    height: 80px;
+    width: 100%;
+}
+
+#check {
+    color: var(--botão-completar);
+}
+
+.card.checked > .card-name {
+    text-decoration: line-through;
+    color: gray;
 }
