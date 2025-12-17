@@ -22,12 +22,6 @@ body {
     background-color: var(--fundo);
 }
 
-h1 {
-    padding: 20px;
-    text-align: center;
-    font-size: 3rem;
-    color: var(--texto);
-}
 
 header {
     display: flex;
@@ -35,6 +29,14 @@ header {
     align-items: center;
     width: 90%;
     /*border: 1px solid red;*/
+    margin: auto;
+}
+
+header > h1 {
+    padding: 20px;
+    text-align: center;
+    font-size: 3rem;
+    color: var(--texto);
     margin: auto;
 }
 
