@@ -78,6 +78,7 @@ main {
     width: 100%;
     box-shadow: 0 0 20px #ccc;
     margin-bottom: 2%;
+    cursor: pointer;
 }
 
 
@@ -112,7 +113,7 @@ main {
     width: 100%;
 }
 
-#check {
+.card.checked .card-icon i {
     color: var(--botão-completar);
 }
 

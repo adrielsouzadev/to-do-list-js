@@ -1,50 +1,78 @@
-const input = document.getElementById('inputTask');
-const btnAdd = document.getElementById('btn-add');
-const main = document.getElementById('taskList')
+let cont = 0
+
+let input = document.getElementById('inputTask');
+let btnAdd = document.getElementById('btn-add');
+let main = document.getElementById('taskList')
 
 btnAdd.addEventListener("click", () => {
-    //PEGAR O VALOR DIGITADO NO INPUT
     let valueInput = input.value.trim();
+    if (valueInput === "") return;
 
-    //SE NÃO FOR VAZIO
-    if (valueInput === "") return;{
+    ++cont;
 
-        //CRIANDO ELEMENTOS
-        const card = document.createElement("div");
-        card.classList.add("card");
+    let card = document.createElement("div");
+    card.classList.add("card");
+    card.id = cont;
 
-        const cardIcon = document.createElement("div")
-        cardIcon.classList.add("card-icon");
-        cardIcon.innerHTML = `<i class="fa-regular fa-circle"></i>`;
+    let cardIcon = document.createElement("div")
+    cardIcon.classList.add("card-icon");
+    cardIcon.innerHTML = `<i class="fa-regular fa-circle"></i>`;
 
-        const cardName = document.createElement("div");
-        cardName.classList.add("card-name");
-        cardName.textContent = valueInput;
-        
-        const cardButton = document.createElement("div");
-        cardButton.classList.add("card-button");
+    let cardName = document.createElement("div");
+    cardName.classList.add("card-name");
+    cardName.textContent = valueInput;
+    
+    let cardButton = document.createElement("div");
+    cardButton.classList.add("card-button");
 
-        const btnDelete = document.createElement("button");
-        btnDelete.classList.add("delete");
-        btnDelete.innerHTML = `<i class="fa-solid fa-trash-can"></i> Deletar`;
+    let btnDelete = document.createElement("button");
+    btnDelete.classList.add("delete");
+    btnDelete.innerHTML = `<i class="fa-solid fa-trash-can"></i> Deletar`;
 
-        // ADICIONANDO EVENTO NO BOTÃO DELETE
-        btnDelete.addEventListener("click", () => {
-            card.remove();
-        });
+    btnDelete.addEventListener("click", () => {
+        cardRemove(card.id);
+    });
 
-        // ADICIONANDO ELEMENTOS NO HTML
-        cardButton.appendChild(btnDelete);
-        card.appendChild(cardIcon);
-        card.appendChild(cardName);
-        card.appendChild(cardButton);
-        main.appendChild(card);
-        
-        //ZERAR OS CAMPOS
-        input.value = "";
-        input.focus();
-    }
+    cardIcon.addEventListener("click", () => {
+        markTask(card.id);
+    })
+
+    cardName.addEventListener("click", () => {
+        markTask(card.id);
+    })
+
+    cardButton.appendChild(btnDelete);
+    card.appendChild(cardIcon);
+    card.appendChild(cardName);
+    card.appendChild(cardButton);
+    main.appendChild(card);
+
+    input.value = "";
+    input.focus();
 });
+
+const cardRemove = (id) => {
+    let card = document.getElementById(id);
+    if (card) card.remove();
+};
+
+const markTask = (id) => {
+    const item = document.getElementById(id);
+    if (!item) return;
+
+    const icon = item.querySelector(".card-icon i");
+
+    const isChecked = item.classList.toggle("checked");
+
+    if (isChecked) {
+        icon.classList.remove("fa-regular", "fa-circle");
+        icon.classList.add("fa-solid", "fa-circle-check");
+        main.appendChild(item);
+    } else {
+        icon.classList.remove("fa-solid", "fa-circle-check");
+        icon.classList.add("fa-regular", "fa-circle");
+    }
+};
 
 input.addEventListener("keyup", (event) => {
     if(event.key === "Enter") {
