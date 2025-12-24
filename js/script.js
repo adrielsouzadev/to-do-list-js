@@ -1,82 +1,102 @@
-let cont = 0
+const input = document.getElementById("inputTask");
+const addButton = document.getElementById("btn-add");
+const taskList = document.getElementById("taskList");
 
-let input = document.getElementById('inputTask');
-let btnAdd = document.getElementById('btn-add');
-let main = document.getElementById('taskList')
+// CARREGA AS TAREFAS DO LOCALSTORAGE OU INICIA COM ARRAY VAZIO
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-btnAdd.addEventListener("click", () => {
-    let valueInput = input.value.trim();
-    if (valueInput === "") return;
+// CONTADOR DE ID (GARANTE QUE NÃO VAI REPETIR ID)
+let counter = tasks.length ? tasks[tasks.length - 1].id : 0;
 
-    ++cont;
+// SALVA AS TAREFAS NO LOCALSTORAGE
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
-    let card = document.createElement("div");
-    card.classList.add("card");
-    card.id = cont;
+// RENDERIZA TODAS AS TAREFAS NA TELA
+function renderTasks() {
+    taskList.innerHTML = "";
 
-    let cardIcon = document.createElement("div")
-    cardIcon.classList.add("card-icon");
-    cardIcon.innerHTML = `<i class="fa-regular fa-circle"></i>`;
+    tasks.forEach(task => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.id = task.id;
 
-    let cardName = document.createElement("div");
-    cardName.classList.add("card-name");
-    cardName.textContent = valueInput;
-    
-    let cardButton = document.createElement("div");
-    cardButton.classList.add("card-button");
+        if (task.completed) {
+            card.classList.add("checked");
+        }
 
-    let btnDelete = document.createElement("button");
-    btnDelete.classList.add("delete");
-    btnDelete.innerHTML = `<i class="fa-solid fa-trash-can"></i> Deletar`;
+        const cardIcon = document.createElement("div");
+        cardIcon.classList.add("card-icon");
+        cardIcon.innerHTML = task.completed
+            ? `<i class="fa-solid fa-circle-check"></i>`
+            : `<i class="fa-regular fa-circle"></i>`;
 
-    btnDelete.addEventListener("click", () => {
-        cardRemove(card.id);
+        const cardName = document.createElement("div");
+        cardName.classList.add("card-name");
+        cardName.textContent = task.text;
+
+        const cardButton = document.createElement("div");
+        cardButton.classList.add("card-button");
+
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("delete");
+        deleteButton.innerHTML = `<i class="fa-solid fa-trash-can"></i> Delete`;
+
+        // EVENTOS DE MARCAR E DELETAR
+        deleteButton.addEventListener("click", () => removeTask(task.id));
+        cardIcon.addEventListener("click", () => toggleTask(task.id));
+        cardName.addEventListener("click", () => toggleTask(task.id));
+
+        cardButton.appendChild(deleteButton);
+        card.append(cardIcon, cardName, cardButton);
+        taskList.appendChild(card);
+    });
+}
+
+// ADICIONA UMA NOVA TAREFA
+addButton.addEventListener("click", () => {
+    const text = input.value.trim();
+    if (!text) return;
+
+    tasks.push({
+        id: ++counter,
+        text: text,
+        completed: false
     });
 
-    cardIcon.addEventListener("click", () => {
-        markTask(card.id);
-    })
-
-    cardName.addEventListener("click", () => {
-        markTask(card.id);
-    })
-
-    cardButton.appendChild(btnDelete);
-    card.appendChild(cardIcon);
-    card.appendChild(cardName);
-    card.appendChild(cardButton);
-    main.appendChild(card);
+    saveTasks();
+    renderTasks();
 
     input.value = "";
     input.focus();
 });
 
-const cardRemove = (id) => {
-    let card = document.getElementById(id);
-    if (card) card.remove();
-};
+// MARCA OU DESMARCA UMA TAREFA
+function toggleTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (!task) return;
 
-const markTask = (id) => {
-    const item = document.getElementById(id);
-    if (!item) return;
+    task.completed = !task.completed;
 
-    const icon = item.querySelector(".card-icon i");
+    saveTasks();
+    renderTasks();
+}
 
-    const isChecked = item.classList.toggle("checked");
+// REMOVE UMA TAREFA
+function removeTask(id) {
+    tasks = tasks.filter(task => task.id !== id);
 
-    if (isChecked) {
-        icon.classList.remove("fa-regular", "fa-circle");
-        icon.classList.add("fa-solid", "fa-circle-check");
-        main.appendChild(item);
-    } else {
-        icon.classList.remove("fa-solid", "fa-circle-check");
-        icon.classList.add("fa-regular", "fa-circle");
-    }
-};
+    saveTasks();
+    renderTasks();
+}
 
+// TECLA ENTER ADICIONA A TAREFA
 input.addEventListener("keyup", (event) => {
-    if(event.key === "Enter") {
-        event.preventDefault();
-        btnAdd.click();
+    if (event.key === "Enter") {
+        addButton.click();
     }
 });
+
+// RENDERIZA AS TAREFAS AO CARREGAR A PÁGINA
+renderTasks();
