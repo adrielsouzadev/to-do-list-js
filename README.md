@@ -1,8 +1,8 @@
 # To-Do List
 
-Aplicação simples para gerenciamento de tarefas, permitindo **adicionar**, **concluir** e **remover itens**.
+Aplicação simples para gerenciamento de tarefas, permitindo **adicionar**, **concluir** e **remover itens**, com persistência de dados no navegador utilizando **LocalStorage**.
 
-Projeto desenvolvido para praticar **JavaScript**, com foco em **manipulação do DOM** e lógica básica de front-end.
+Projeto desenvolvido para praticar JavaScript puro, com foco em manipulação do DOM, controle de estado da aplicação e lógica de front-end.
 
 ---
 
@@ -17,6 +17,7 @@ Projeto desenvolvido para praticar **JavaScript**, com foco em **manipulação d
 * Adicionar tarefas
 * Marcar como concluídas
 * Remover tarefas
+* Salvar tarefas automaticamente com LocalStorage
 
 ---
 
@@ -24,7 +25,7 @@ Projeto desenvolvido para praticar **JavaScript**, com foco em **manipulação d
 
 * HTML5 – estrutura da aplicação
 * CSS3 – estilização e layout
-* JavaScript – lógica da aplicação e manipulação do DOM
+* JavaScript – lógica da aplicação e manipulação do DOM e LocalStorage
 
 ---
 
