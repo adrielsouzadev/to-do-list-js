@@ -5,7 +5,7 @@ const taskList = document.getElementById("taskList");
 // CARREGA AS TAREFAS DO LOCALSTORAGE OU INICIA COM ARRAY VAZIO
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-// CONTADOR DE ID (GARANTE QUE NÃO VAI REPETIR ID)
+// MANTÉM O ID SEQUENCIAL MESMO APÓS RECARREGAR AS TAREFAS SALVAS
 let counter = tasks.length ? tasks[tasks.length - 1].id : 0;
 
 // SALVA AS TAREFAS NO LOCALSTORAGE
